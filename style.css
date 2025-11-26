@@ -50,10 +50,10 @@ body {
 }
 
 .brand-logo-img {
-  width: 32px;
-  height: 32px;
+  height: 48px;      /* bigger logo */
+  width: auto;       /* keeps proportions */
   object-fit: contain;
-  border-radius: 6px;
+  display: block;
 }
 
 .brand-text {
