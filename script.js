@@ -1,6 +1,54 @@
 // STEP 1: replace this with my  Cloudflare Worker URL 
 const WORKER_URL = "https://boolean-builder-ai.yellowsteel.workers.dev";
 
+// Predefined templates for Phase 1
+const TEMPLATES = {
+  java_backend: {
+    label: "Java Backend Dev",
+    titles: "backend developer, backend engineer, software engineer",
+    skills: "java, spring, microservices, sql, rest api",
+    locations: "berlin, hamburg",
+    excludes: 'recruiter, "talent acquisition", hr',
+    description:
+      "Senior backend engineers with Java and Spring experience, microservices and REST APIs, based in Berlin or Hamburg. Exclude recruiters and HR profiles.",
+  },
+  react_frontend: {
+    label: "React Frontend Dev",
+    titles: "frontend developer, frontend engineer, react developer",
+    skills: "react, javascript, typescript, css, html",
+    locations: "london, remote",
+    excludes: 'recruiter, "talent acquisition", hr',
+    description:
+      "Frontend engineers with strong React and JavaScript/TypeScript skills, in London or remote-friendly. Exclude recruiters and HR.",
+  },
+  devops_engineer: {
+    label: "DevOps Engineer",
+    titles: "devops engineer, site reliability engineer, sre",
+    skills: "aws, kubernetes, docker, ci/cd, terraform",
+    locations: "berlin, munich, remote",
+    excludes: 'recruiter, "talent acquisition", hr',
+    description:
+      "DevOps / SRE profiles with AWS, Kubernetes, Docker and CI/CD experience, based in Germany or remote. Exclude recruiters and HR.",
+  },
+  data_analyst: {
+    label: "Data Analyst",
+    titles: "data analyst, bi analyst, business intelligence analyst",
+    skills: "sql, excel, tableau, power bi, dashboards, reporting",
+    locations: "amsterdam, rotterdam, remote",
+    excludes: 'recruiter, "talent acquisition", hr',
+    description:
+      "Data analysts with SQL and BI tools like Tableau or Power BI, based in the Netherlands or remote. Exclude recruiters and HR.",
+  },
+  sales_rep: {
+    label: "Sales Representative",
+    titles: "sales representative, account executive, sales executive, business development",
+    skills: "b2b sales, cold calling, crm, pipeline, negotiation",
+    locations: "paris, lyon, remote",
+    excludes: 'recruiter, "talent acquisition", hr',
+    description:
+      "B2B sales reps / account executives with CRM experience, strong pipeline management and negotiation skills, in France or remote. Exclude recruiters and HR.",
+  },
+};
 // --- Helper functions for local Boolean generation ---
 
 function splitTerms(str) {
