@@ -383,11 +383,20 @@ Task:
 "${description}"
 
 Rules:
-- Return ONLY the Boolean string.
-- Do NOT explain, do NOT add any other text.
-- Use AND / OR / NOT and parentheses.
-- For Google X-Ray, include: site:linkedin.com/in and exclude job listings (like jobs, hiring).
-- For LinkedIn, optimize for clarity and stay under typical character limits.
+- Return ONLY the Boolean string. No explanations.
+- Use AND / OR / NOT and parentheses correctly.
+- If the platform is "LinkedIn Free":
+    - DO NOT include 'site:linkedin.com/in'
+    - DO NOT include 'intitle:' or 'inurl:'
+    - DO NOT include Google operators like -inurl, -intitle, site:, etc.
+    - Output only pure LinkedIn Boolean logic.
+- If the platform is "LinkedIn Recruiter":
+    - Same as LinkedIn Free, but longer strings are allowed.
+- If the platform is "Google X-Ray":
+    - MUST include 'site:linkedin.com/in'
+    - MUST exclude job listings using -intitle: and -inurl:
+    IMPORTANT:
+You MUST follow the platform-specific rules exactly.
 `.trim();
 
     try {
