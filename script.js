@@ -134,6 +134,7 @@ function buildBooleanString({ titles, skills, locations, excludes, platform }) {
   return core;
 }
 // Try to compress a Boolean string to fit LinkedIn Free by removing extra OR terms.
+// Try to compress a Boolean string to fit LinkedIn Free by removing extra OR terms.
 function compressForLinkedIn(query, targetLength) {
   let current = (query || "").trim();
   if (!current) return "";
@@ -141,34 +142,37 @@ function compressForLinkedIn(query, targetLength) {
   // Already small enough
   if (current.length <= targetLength) return current;
 
-  // Helper: try to shorten the longest OR-group in parentheses
+  // Helper: try to shorten the longest OR-group inside parentheses
   function shortenOneGroup(str) {
     const groupRegex = /\([^()]*\)/g;
     let match;
     const groups = [];
 
+    // Collect all simple (...) groups (no nested parentheses)
     while ((match = groupRegex.exec(str)) !== null) {
       groups.push({ text: match[0], index: match.index });
     }
 
-    // Sort by length (longest groups first)
+    // Work on the longest groups first (most impact)
     groups.sort((a, b) => b.text.length - a.text.length);
 
     for (const g of groups) {
-      if (!g.text.includes(" OR ")) continue;
+      const inner = g.text.slice(1, -1).trim(); // content without outer parentheses
+      if (!inner.includes(" OR ")) continue;
 
-      // Remove the last " OR term" from this group
-      const lastOrIndex = g.text.lastIndexOf(" OR ");
-      if (lastOrIndex === -1) continue;
+      const terms = inner.split(/\s+OR\s+/);
+      if (terms.length <= 1) continue;
 
-      const shortenedGroup = g.text.slice(0, lastOrIndex);
+      // Remove the last term in this OR group
+      terms.pop();
+      const newInner = terms.join(" OR ");
+      const newGroup = "(" + newInner + ")";
+
       const before = str.slice(0, g.index);
       const after = str.slice(g.index + g.text.length);
+      const combined = (before + newGroup + after).replace(/\s+/g, " ").trim();
 
-      return {
-        str: (before + shortenedGroup + after).replace(/\s+/g, " ").trim(),
-        changed: true,
-      };
+      return { str: combined, changed: true };
     }
 
     return { str, changed: false };
@@ -179,10 +183,10 @@ function compressForLinkedIn(query, targetLength) {
     safety++;
     const { str, changed } = shortenOneGroup(current);
     current = str;
-    if (!changed) break;
+    if (!changed) break; // nothing else to shorten
   }
 
-  // If still too long, try dropping NOT clause
+  // If still too long, try dropping the NOT clause at the end
   if (current.length > targetLength) {
     const notIndex = current.indexOf(" NOT ");
     if (notIndex !== -1) {
