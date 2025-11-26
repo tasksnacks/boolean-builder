@@ -1,5 +1,5 @@
 // STEP 1: replace this with my  Cloudflare Worker URL 
-const WORKER_URL = "https://YOUR-WORKER-NAME.YOUR-ACCOUNT.workers.dev";
+const WORKER_URL = "https://boolean-builder-ai.yellowsteel.workers.dev/";
 
 // --- Helper functions for local Boolean generation ---
 
