@@ -2,127 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Boolean Builder Pro (v0)</title>
+  <title>BooleanBear – AI Boolean Builder for Recruiters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <h1>Boolean Builder Pro (v0)</h1>
-    <p class="tagline">Generate clean Boolean search strings for recruiters.</p>
+  <div class="page">
 
-    <!-- Card 1: Structured generator -->
-    <div class="card">
-  <h2>1. Structured Boolean Builder</h2>
-
-  <!-- 🎯 Templates row -->
-  <div class="templates">
-    <p class="templates-label">Or start with a template:</p>
-    <div class="template-buttons">
-      <button class="template-btn" data-template="java_backend">Java Backend Dev</button>
-      <button class="template-btn" data-template="react_frontend">React Frontend Dev</button>
-      <button class="template-btn" data-template="devops_engineer">DevOps Engineer</button>
-      <button class="template-btn" data-template="data_analyst">Data Analyst</button>
-      <button class="template-btn" data-template="sales_rep">Sales Representative</button>
-    </div>
-  </div>
-
-  <label>
-    Job titles (comma separated)
-    <input id="titles" type="text" placeholder="e.g. software engineer, developer, backend" />
-  </label>
-
-  <label>
-    Skills / keywords (comma separated)
-    <input id="skills" type="text" placeholder="e.g. java, spring, microservices" />
-  </label>
-
-  <label>
-    Locations (comma separated, optional)
-    <input id="locations" type="text" placeholder="e.g. berlin, hamburg" />
-  </label>
-
-  <label>
-    Exclude terms (comma separated, optional)
-    <input id="excludes" type="text" placeholder='e.g. recruiter, "talent acquisition"' />
-  </label>
-
-  <label>
-    Platform
-    <select id="platform">
-      <option value="linkedin_free">LinkedIn (Free)</option>
-      <option value="linkedin_recruiter">LinkedIn Recruiter</option>
-      <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
-    </select>
-  </label>
-
-  <button id="generateBtn">Generate Boolean String</button>
-</div>
-
-      <label>
-        Skills / keywords (comma separated)
-        <input id="skills" type="text" placeholder="e.g. java, spring, microservices" />
-      </label>
-
-      <label>
-        Locations (comma separated, optional)
-        <input id="locations" type="text" placeholder="e.g. berlin, hamburg" />
-      </label>
-
-      <label>
-        Exclude terms (comma separated, optional)
-        <input id="excludes" type="text" placeholder='e.g. recruiter, "talent acquisition"' />
-      </label>
-
-      <label>
-        Platform
-        <select id="platform">
-          <option value="linkedin_free">LinkedIn (Free)</option>
-          <option value="linkedin_recruiter">LinkedIn Recruiter</option>
-          <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
-        </select>
-      </label>
-
-      <button id="generateBtn">Generate Boolean String</button>
-    </div>
-
-    <!-- Card 2: AI helper (will use Cloudflare + DeepSeek) -->
-    <div class="card">
-      <h2>2. AI Boolean Builder (DeepSeek)</h2>
-      <p style="font-size: 13px; color: #9ca3af;">
-        Describe who you want to find in plain language. The AI will turn it into a Boolean string.
-      </p>
-
-      <label>
-        Describe your ideal candidate / search:
-        <textarea id="nlPrompt" rows="4" placeholder="e.g. Senior backend engineers with Java or Kotlin, experience in microservices, based in Berlin or remote, exclude recruiters and HR."></textarea>
-      </label>
-
-      <label>
-        Target platform for this AI query
-        <select id="aiPlatform">
-          <option value="linkedin_free">LinkedIn (Free)</option>
-          <option value="linkedin_recruiter">LinkedIn Recruiter</option>
-          <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
-        </select>
-      </label>
-
-      <button id="aiGenerateBtn">Let AI generate Boolean</button>
-      <p id="aiStatus" class="hint"></p>
-    </div>
-
-    <!-- Card 3: Output -->
-    <div class="card">
-      <h2>3. Your Boolean string</h2>
-      <textarea id="output" rows="6" readonly></textarea>
-        <div class="output-actions">
-    <span id="charCount" class="char-ok">0 characters</span>
-    <div class="output-buttons">
-      <button id="compressBtn">Compress for LinkedIn Free</button>
-      <button id="copyBtn">Copy to clipboard</button>
-    </div>
+    <!-- Top navigation -->
+    <header class="top-nav">
+      <div class="top-nav-inner">
+        <div class="brand">
+          <div class="brand-logo">🐻</div>
+          <div class="brand-text">
+            <span class="brand-name">BooleanBear</span>
+            <span class="brand-tagline">AI Boolean Builder</span>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="#product">Product</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#app">Try it</a>
+          <a href="#faq">FAQ</a>
+        </nav>
       </div>
-      <p id="hint" class="hint"></p>
-    </div>
+    </header>
+
+    <main>
+      <!-- Hero section -->
+      <section class="hero" id="top">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <h1>Stop fighting Boolean. <span class="accent">Let the bear do it.</span></h1>
+            <p class="hero-subtitle">
+              BooleanBear turns plain-English descriptions into clean, platform-ready Boolean search strings
+              for LinkedIn and Google X-Ray.
+            </p>
+            <div class="hero-actions">
+              <a href="#app" class="btn btn-primary">Start building Boolean</a>
+              <span class="hero-secondary">No login. No tracking. Just better searches.</span>
+            </div>
+            <div class="hero-badges">
+              <span>⚡ AI-powered</span>
+              <span>🎯 LinkedIn & X-Ray ready</span>
+              <span>🧪 Built for recruiters</span>
+            </div>
+          </div>
+          <div class="hero-preview">
+            <div class="preview-card">
+              <div class="preview-header">
+                <span class="pill pill-green">Live demo</span>
+                <span class="preview-title">Backend engineer in Berlin…</span>
+              </div>
+              <pre class="preview-code">
+("backend developer" OR "backend engineer")
+AND (java OR spring OR microservices)
+AND (berlin OR hamburg) NOT recruiter</pre>
+              <p class="preview-caption">Copy-paste ready for LinkedIn search.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product features -->
+      <section class="section" id="product">
+        <div class="section-heading">
+          <h2>Why recruiters use BooleanBear</h2>
+          <p>Built for sourcers who care about precision, speed and not breaking LinkedIn.</p>
+        </div>
+        <div class="grid-3">
+          <div class="feature-card">
+            <h3>AI Boolean Builder</h3>
+            <p>Describe your ideal candidate in plain language. BooleanBear turns it into a clean search string for LinkedIn or Google X-Ray.</p>
+          </div>
+          <div class="feature-card">
+            <h3>One-click templates</h3>
+            <p>Start from ready-made templates for engineers, designers, sales, data and more. Tweak them or pass them to AI.</p>
+          </div>
+          <div class="feature-card">
+            <h3>LinkedIn-smart</h3>
+            <p>See character counts, warnings for LinkedIn Free and a one-click “Compress for LinkedIn” helper for long strings.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Google X-Ray presets</h3>
+            <p>Auto-wrap your search in <code>site:linkedin.com/in</code> with filters to strip out job posts and SEO spam.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Local-first</h3>
+            <p>No accounts, no database, no data sent to a server other than the AI call. Your searches live in your browser.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Free while in beta</h3>
+            <p>Use BooleanBear as much as you want while the product is evolving. Feedback from recruiters is gold.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="section" id="how-it-works">
+        <div class="section-heading">
+          <h2>How BooleanBear fits into your sourcing workflow</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Describe the profile</h3>
+            <p>Type what you’d tell a hiring manager: “Senior Java backend in Berlin or Hamburg, exclude recruiters and HR.”</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Generate the Boolean</h3>
+            <p>Let the AI builder or structured form generate a clean Boolean string for LinkedIn or Google X-Ray.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Copy & search</h3>
+            <p>Paste it into LinkedIn search or Google. Adjust filters as usual. Get to better candidates faster.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- App section -->
+      <section class="section app-section" id="app">
+        <div class="section-heading">
+          <h2>Try BooleanBear</h2>
+          <p>Everything runs in your browser. Start with templates, or jump straight to AI.</p>
+        </div>
+
+        <div class="app-shell">
+          <div class="app-layout">
+            <div class="app-main">
+              <!-- Card 1: Structured generator -->
+              <div class="card">
+                <h2>1. Structured Boolean Builder</h2>
+
+                <div class="templates">
+                  <p class="templates-label">Or start with a template:</p>
+                  <div class="template-buttons">
+                    <button class="template-btn" data-template="java_backend">Java Backend Dev</button>
+                    <button class="template-btn" data-template="react_frontend">React Frontend Dev</button>
+                    <button class="template-btn" data-template="devops_engineer">DevOps Engineer</button>
+                    <button class="template-btn" data-template="data_analyst">Data Analyst</button>
+                    <button class="template-btn" data-template="sales_rep">Sales Representative</button>
+                  </div>
+                </div>
+
+                <label>
+                  Job titles (comma separated)
+                  <input id="titles" type="text" placeholder="e.g. software engineer, developer, backend" />
+                </label>
+
+                <label>
+                  Skills / keywords (comma separated)
+                  <input id="skills" type="text" placeholder="e.g. java, spring, microservices" />
+                </label>
+
+                <label>
+                  Locations (comma separated, optional)
+                  <input id="locations" type="text" placeholder="e.g. berlin, hamburg" />
+                </label>
+
+                <label>
+                  Exclude terms (comma separated, optional)
+                  <input id="excludes" type="text" placeholder='e.g. recruiter, "talent acquisition"' />
+                </label>
+
+                <label>
+                  Platform
+                  <select id="platform">
+                    <option value="linkedin_free">LinkedIn (Free)</option>
+                    <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+                    <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
+                  </select>
+                </label>
+
+                <button id="generateBtn">Generate Boolean String</button>
+              </div>
+
+              <!-- Card 2: AI builder -->
+              <div class="card">
+                <h2>2. AI Boolean Builder (DeepSeek)</h2>
+                <p class="hint">
+                  Describe who you want to find in plain language. The AI will turn it into a Boolean string.
+                </p>
+
+                <label>
+                  Describe your ideal candidate / search:
+                  <textarea id="nlPrompt" rows="4" placeholder="e.g. Senior backend engineers with Java or Kotlin, microservices experience, based in Berlin or remote, exclude recruiters and HR."></textarea>
+                </label>
+
+                <label>
+                  Target platform for this AI query
+                  <select id="aiPlatform">
+                    <option value="linkedin_free">LinkedIn (Free)</option>
+                    <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+                    <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
+                  </select>
+                </label>
+
+                <button id="aiGenerateBtn">Let AI generate Boolean</button>
+                <p id="aiStatus" class="hint"></p>
+              </div>
+            </div>
+
+            <!-- Output column -->
+            <div class="app-side">
+              <div class="card">
+                <h2>3. Your Boolean string</h2>
+                <textarea id="output" rows="10" readonly></textarea>
+                <div class="output-actions">
+                  <span id="charCount" class="char-ok">0 characters</span>
+                  <div class="output-buttons">
+                    <button id="compressBtn">Compress for LinkedIn Free</button>
+                    <button id="copyBtn">Copy to clipboard</button>
+                  </div>
+                </div>
+                <p id="hint" class="hint"></p>
+                <p class="tiny-help">
+                  Paste this into the LinkedIn search bar (People tab), or into Google when using the X-Ray preset.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="section-heading">
+          <h2>FAQ</h2>
+        </div>
+        <div class="faq">
+          <div class="faq-item">
+            <h3>Is BooleanBear free?</h3>
+            <p>Yes. BooleanBear is in beta and free to use while it evolves. In the future there may be a Pro tier for teams.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Do I need an account?</h3>
+            <p>No. Everything runs in your browser. We don’t store your searches on a server.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Will this work with LinkedIn Recruiter?</h3>
+            <p>Yes. Choose “LinkedIn Recruiter” as the platform. Recruiter supports longer strings than LinkedIn Free.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What about Google X-Ray?</h3>
+            <p>Select “Google X-Ray” and BooleanBear will wrap your query in <code>site:linkedin.com/in</code> with filters to strip out job posts.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span>🐻 BooleanBear – AI Boolean Builder for Recruiters</span>
+        <span class="footer-right">Built as a side project – feedback welcome.</span>
+      </div>
+    </footer>
   </div>
 
   <script src="script.js"></script>
