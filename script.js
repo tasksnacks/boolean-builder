@@ -1,4 +1,4 @@
-// STEP 1: replace this with my  Cloudflare Worker URL 
+// STEP 1: replace this with my Cloudflare Worker URL
 const WORKER_URL = "https://boolean-builder-ai.yellowsteel.workers.dev";
 
 // Predefined templates for Phase 1
@@ -41,7 +41,8 @@ const TEMPLATES = {
   },
   sales_rep: {
     label: "Sales Representative",
-    titles: "sales representative, account executive, sales executive, business development",
+    titles:
+      "sales representative, account executive, sales executive, business development",
     skills: "b2b sales, cold calling, crm, pipeline, negotiation",
     locations: "paris, lyon, remote",
     excludes: 'recruiter, "talent acquisition", hr',
@@ -49,15 +50,16 @@ const TEMPLATES = {
       "B2B sales reps / account executives with CRM experience, strong pipeline management and negotiation skills, in France or remote. Exclude recruiters and HR.",
   },
 };
+
 // --- Helper functions for local Boolean generation ---
 
 function splitTerms(str) {
   if (!str.trim()) return [];
   return str
     .split(",")
-    .map(t => t.trim())
+    .map((t) => t.trim())
     .filter(Boolean)
-    .map(t => {
+    .map((t) => {
       if (t.includes(" ")) {
         return `"${t}"`;
       }
@@ -70,6 +72,8 @@ function buildGroup(terms, joinWord) {
   if (terms.length === 1) return terms[0];
   return "(" + terms.join(` ${joinWord} `) + ")";
 }
+
+// Google X-Ray helper
 function applyGoogleXRayPreset(core) {
   const trimmed = (core || "").trim();
   const baseFilter =
@@ -85,10 +89,7 @@ function applyGoogleXRayPreset(core) {
   // If the user / AI already included site:linkedin.com/in, don't duplicate it
   if (lower.includes("site:linkedin.com/in")) {
     // If it already has our filters, just return as is
-    if (
-      lower.includes("-intitle:jobs") ||
-      lower.includes("-inurl:jobs")
-    ) {
+    if (lower.includes("-intitle:jobs") || lower.includes("-inurl:jobs")) {
       return trimmed;
     }
     // Otherwise, append our standard filters
@@ -98,6 +99,7 @@ function applyGoogleXRayPreset(core) {
   // Normal case: wrap the core in site:linkedin.com/in plus filters
   return `site:linkedin.com/in (${trimmed}) ${baseFilter}`;
 }
+
 function buildBooleanString({ titles, skills, locations, excludes, platform }) {
   const titleTerms = splitTerms(titles);
   const skillTerms = splitTerms(skills);
@@ -122,12 +124,10 @@ function buildBooleanString({ titles, skills, locations, excludes, platform }) {
     core = core ? core + " NOT " + excludeGroup : "NOT " + excludeGroup;
   }
 
-    if (platform === "google_xray") {
+  if (platform === "google_xray") {
     core = applyGoogleXRayPreset(core);
   }
 
-  return core;
-}
   return core;
 }
 
@@ -144,8 +144,8 @@ function getHint(platform, length) {
   }
 
   if (platform === "google_xray") {
-  return "ℹ This query is formatted as a Google X-Ray search for LinkedIn profiles. Paste it into Google Search.";
-}
+    return "ℹ This query is formatted as a Google X-Ray search for LinkedIn profiles. Paste it into Google Search.";
+  }
 
   return "";
 }
@@ -169,6 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiGenerateBtn = document.getElementById("aiGenerateBtn");
   const aiStatus = document.getElementById("aiStatus");
   const templateButtons = document.querySelectorAll(".template-btn");
+
+  function updateOutput(text, platform) {
+    output.value = text || "";
+    charCount.textContent = `${(text || "").length} characters`;
+    hint.textContent = text ? getHint(platform, text.length) : "";
+  }
 
   function applyTemplate(templateKey) {
     const tpl = TEMPLATES[templateKey];
@@ -198,17 +204,12 @@ document.addEventListener("DOMContentLoaded", () => {
     updateOutput(booleanString, platformSelect.value);
   }
 
-  templateButtons.forEach(btn => {
+  templateButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const key = btn.getAttribute("data-template");
       applyTemplate(key);
     });
   });
-  function updateOutput(text, platform) {
-    output.value = text || "";
-    charCount.textContent = `${(text || "").length} characters`;
-    hint.textContent = text ? getHint(platform, text.length) : "";
-  }
 
   function generate() {
     const booleanString = buildBooleanString({
@@ -243,7 +244,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!WORKER_URL.startsWith("https://")) {
-      aiStatus.textContent = "AI is not configured yet. Add your Cloudflare Worker URL in script.js.";
+      aiStatus.textContent =
+        "AI is not configured yet. Add your Cloudflare Worker URL in script.js.";
       return;
     }
 
@@ -282,28 +284,31 @@ Rules:
       });
 
       if (!response.ok) {
-        aiStatus.textContent = "AI request failed. Check your Cloudflare Worker or API key.";
+        aiStatus.textContent =
+          "AI request failed. Check your Cloudflare Worker or API key.";
         return;
       }
 
       const data = await response.json();
-let booleanString = (data.boolean || "").trim();
+      let booleanString = (data.boolean || "").trim();
 
-if (!booleanString) {
-  aiStatus.textContent = "AI responded, but I couldn't read a Boolean string from it.";
-  return;
-}
+      if (!booleanString) {
+        aiStatus.textContent =
+          "AI responded, but I couldn't read a Boolean string from it.";
+        return;
+      }
 
-// If target is Google X-Ray, wrap / normalize the AI output
-if (platform === "google_xray") {
-  booleanString = applyGoogleXRayPreset(booleanString);
-}
+      // If target is Google X-Ray, wrap / normalize the AI output
+      if (platform === "google_xray") {
+        booleanString = applyGoogleXRayPreset(booleanString);
+      }
 
-updateOutput(booleanString, platform);
-aiStatus.textContent = "Done! Boolean string generated by AI.";
+      updateOutput(booleanString, platform);
+      aiStatus.textContent = "Done! Boolean string generated by AI.";
     } catch (err) {
       console.error(err);
-      aiStatus.textContent = "Network error talking to AI. Check your internet or Worker URL.";
+      aiStatus.textContent =
+        "Network error talking to AI. Check your internet or Worker URL.";
     }
   }
 
