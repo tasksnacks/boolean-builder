@@ -37,7 +37,7 @@ body {
 .top-nav-inner {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 10px 16px;
+   padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,8 +50,8 @@ body {
 }
 
 .brand-logo-img {
-  height: 48px;      /* bigger logo */
-  width: auto;       /* keeps proportions */
+  height: 64px;
+  width: auto;
   object-fit: contain;
   display: block;
 }
