@@ -128,3 +128,29 @@ button:hover {
   background: #111827;
   border-color: #38bdf8;
 }
+
+.output-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+#compressBtn {
+  background: #f97316; /* orange */
+  color: #020617;
+}
+
+#compressBtn:hover {
+  filter: brightness(1.05);
+}
+
+.char-ok {
+  color: #9ca3af;
+}
+
+.char-warn {
+  color: #facc15; /* yellow */
+}
+
+.char-danger {
+  color: #fb923c; /* strong orange */
+}
