@@ -143,7 +143,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiPlatform = document.getElementById("aiPlatform");
   const aiGenerateBtn = document.getElementById("aiGenerateBtn");
   const aiStatus = document.getElementById("aiStatus");
+  const templateButtons = document.querySelectorAll(".template-btn");
 
+  function applyTemplate(templateKey) {
+    const tpl = TEMPLATES[templateKey];
+    if (!tpl) return;
+
+    titlesInput.value = tpl.titles;
+    skillsInput.value = tpl.skills;
+    locationsInput.value = tpl.locations;
+    excludesInput.value = tpl.excludes;
+
+    // Default structured platform: LinkedIn Free
+    platformSelect.value = "linkedin_free";
+
+    // Also pre-fill AI prompt so they can use the AI version immediately
+    if (nlPrompt) {
+      nlPrompt.value = tpl.description;
+    }
+
+    // Auto-generate a structured Boolean immediately for quick feedback
+    const booleanString = buildBooleanString({
+      titles: titlesInput.value,
+      skills: skillsInput.value,
+      locations: locationsInput.value,
+      excludes: excludesInput.value,
+      platform: platformSelect.value,
+    });
+    updateOutput(booleanString, platformSelect.value);
+  }
+
+  templateButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const key = btn.getAttribute("data-template");
+      applyTemplate(key);
+    });
+  });
   function updateOutput(text, platform) {
     output.value = text || "";
     charCount.textContent = `${(text || "").length} characters`;
