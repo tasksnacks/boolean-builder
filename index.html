@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Boolean Builder Pro (v0)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>Boolean Builder Pro (v0)</h1>
+    <p class="tagline">Generate clean Boolean search strings for recruiters.</p>
+
+    <!-- Card 1: Structured generator -->
+    <div class="card">
+      <h2>1. Structured Boolean Builder</h2>
+
+      <label>
+        Job titles (comma separated)
+        <input id="titles" type="text" placeholder="e.g. software engineer, developer, backend" />
+      </label>
+
+      <label>
+        Skills / keywords (comma separated)
+        <input id="skills" type="text" placeholder="e.g. java, spring, microservices" />
+      </label>
+
+      <label>
+        Locations (comma separated, optional)
+        <input id="locations" type="text" placeholder="e.g. berlin, hamburg" />
+      </label>
+
+      <label>
+        Exclude terms (comma separated, optional)
+        <input id="excludes" type="text" placeholder='e.g. recruiter, "talent acquisition"' />
+      </label>
+
+      <label>
+        Platform
+        <select id="platform">
+          <option value="linkedin_free">LinkedIn (Free)</option>
+          <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+          <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
+        </select>
+      </label>
+
+      <button id="generateBtn">Generate Boolean String</button>
+    </div>
+
+    <!-- Card 2: AI helper (will use Cloudflare + DeepSeek) -->
+    <div class="card">
+      <h2>2. AI Boolean Builder (DeepSeek)</h2>
+      <p style="font-size: 13px; color: #9ca3af;">
+        Describe who you want to find in plain language. The AI will turn it into a Boolean string.
+      </p>
+
+      <label>
+        Describe your ideal candidate / search:
+        <textarea id="nlPrompt" rows="4" placeholder="e.g. Senior backend engineers with Java or Kotlin, experience in microservices, based in Berlin or remote, exclude recruiters and HR."></textarea>
+      </label>
+
+      <label>
+        Target platform for this AI query
+        <select id="aiPlatform">
+          <option value="linkedin_free">LinkedIn (Free)</option>
+          <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+          <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
+        </select>
+      </label>
+
+      <button id="aiGenerateBtn">Let AI generate Boolean</button>
+      <p id="aiStatus" class="hint"></p>
+    </div>
+
+    <!-- Card 3: Output -->
+    <div class="card">
+      <h2>3. Your Boolean string</h2>
+      <textarea id="output" rows="6" readonly></textarea>
+      <div class="output-actions">
+        <span id="charCount">0 characters</span>
+        <button id="copyBtn">Copy to clipboard</button>
+      </div>
+      <p id="hint" class="hint"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
