@@ -12,12 +12,51 @@
 
     <!-- Card 1: Structured generator -->
     <div class="card">
-      <h2>1. Structured Boolean Builder</h2>
+  <h2>1. Structured Boolean Builder</h2>
 
-      <label>
-        Job titles (comma separated)
-        <input id="titles" type="text" placeholder="e.g. software engineer, developer, backend" />
-      </label>
+  <!-- 🎯 Templates row -->
+  <div class="templates">
+    <p class="templates-label">Or start with a template:</p>
+    <div class="template-buttons">
+      <button class="template-btn" data-template="java_backend">Java Backend Dev</button>
+      <button class="template-btn" data-template="react_frontend">React Frontend Dev</button>
+      <button class="template-btn" data-template="devops_engineer">DevOps Engineer</button>
+      <button class="template-btn" data-template="data_analyst">Data Analyst</button>
+      <button class="template-btn" data-template="sales_rep">Sales Representative</button>
+    </div>
+  </div>
+
+  <label>
+    Job titles (comma separated)
+    <input id="titles" type="text" placeholder="e.g. software engineer, developer, backend" />
+  </label>
+
+  <label>
+    Skills / keywords (comma separated)
+    <input id="skills" type="text" placeholder="e.g. java, spring, microservices" />
+  </label>
+
+  <label>
+    Locations (comma separated, optional)
+    <input id="locations" type="text" placeholder="e.g. berlin, hamburg" />
+  </label>
+
+  <label>
+    Exclude terms (comma separated, optional)
+    <input id="excludes" type="text" placeholder='e.g. recruiter, "talent acquisition"' />
+  </label>
+
+  <label>
+    Platform
+    <select id="platform">
+      <option value="linkedin_free">LinkedIn (Free)</option>
+      <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+      <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
+    </select>
+  </label>
+
+  <button id="generateBtn">Generate Boolean String</button>
+</div>
 
       <label>
         Skills / keywords (comma separated)
