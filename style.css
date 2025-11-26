@@ -558,3 +558,14 @@ button:hover {
     display: none;
   }
 }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit; /* keeps original text color */
+}
+
+.brand:hover {
+  opacity: 0.85; /* tiny hover polish */
+}
