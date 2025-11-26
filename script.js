@@ -1,6 +1,9 @@
 // STEP 1: replace this with my Cloudflare Worker URL
 const WORKER_URL = "https://boolean-builder-ai.yellowsteel.workers.dev";
 
+const LINKEDIN_FREE_LIMIT = 100;      // hard target
+const LINKEDIN_FREE_SOFT_LIMIT = 130; // warn + allow compression
+
 // Predefined templates for Phase 1
 const TEMPLATES = {
   java_backend: {
@@ -130,7 +133,65 @@ function buildBooleanString({ titles, skills, locations, excludes, platform }) {
 
   return core;
 }
+// Try to compress a Boolean string to fit LinkedIn Free by removing extra OR terms.
+function compressForLinkedIn(query, targetLength) {
+  let current = (query || "").trim();
+  if (!current) return "";
 
+  // Already small enough
+  if (current.length <= targetLength) return current;
+
+  // Helper: try to shorten the longest OR-group in parentheses
+  function shortenOneGroup(str) {
+    const groupRegex = /\([^()]*\)/g;
+    let match;
+    const groups = [];
+
+    while ((match = groupRegex.exec(str)) !== null) {
+      groups.push({ text: match[0], index: match.index });
+    }
+
+    // Sort by length (longest groups first)
+    groups.sort((a, b) => b.text.length - a.text.length);
+
+    for (const g of groups) {
+      if (!g.text.includes(" OR ")) continue;
+
+      // Remove the last " OR term" from this group
+      const lastOrIndex = g.text.lastIndexOf(" OR ");
+      if (lastOrIndex === -1) continue;
+
+      const shortenedGroup = g.text.slice(0, lastOrIndex);
+      const before = str.slice(0, g.index);
+      const after = str.slice(g.index + g.text.length);
+
+      return {
+        str: (before + shortenedGroup + after).replace(/\s+/g, " ").trim(),
+        changed: true,
+      };
+    }
+
+    return { str, changed: false };
+  }
+
+  let safety = 0;
+  while (current.length > targetLength && safety < 25) {
+    safety++;
+    const { str, changed } = shortenOneGroup(current);
+    current = str;
+    if (!changed) break;
+  }
+
+  // If still too long, try dropping NOT clause
+  if (current.length > targetLength) {
+    const notIndex = current.indexOf(" NOT ");
+    if (notIndex !== -1) {
+      current = current.slice(0, notIndex).trim();
+    }
+  }
+
+  return current;
+}
 function getHint(platform, length) {
   if (platform === "linkedin_free") {
     if (length > 100) {
@@ -158,11 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const locationsInput = document.getElementById("locations");
   const excludesInput = document.getElementById("excludes");
   const platformSelect = document.getElementById("platform");
-  const output = document.getElementById("output");
+    const output = document.getElementById("output");
   const generateBtn = document.getElementById("generateBtn");
   const copyBtn = document.getElementById("copyBtn");
+  const compressBtn = document.getElementById("compressBtn");
   const charCount = document.getElementById("charCount");
   const hint = document.getElementById("hint");
+
+  let lastPlatform = "linkedin_free";
 
   const nlPrompt = document.getElementById("nlPrompt");
   const aiPlatform = document.getElementById("aiPlatform");
@@ -170,10 +234,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiStatus = document.getElementById("aiStatus");
   const templateButtons = document.querySelectorAll(".template-btn");
 
-  function updateOutput(text, platform) {
-    output.value = text || "";
-    charCount.textContent = `${(text || "").length} characters`;
-    hint.textContent = text ? getHint(platform, text.length) : "";
+    function updateOutput(text, platform) {
+    lastPlatform = platform || lastPlatform;
+
+    const value = text || "";
+    output.value = value;
+
+    const length = value.length;
+    charCount.textContent = `${length} characters`;
+
+    // Reset color classes
+    charCount.classList.remove("char-ok", "char-warn", "char-danger");
+
+    // Default: hide compress button
+    if (compressBtn) {
+      compressBtn.style.display = "none";
+    }
+
+    // LinkedIn Free: show warnings + compress option
+    if (lastPlatform === "linkedin_free") {
+      if (!value) {
+        charCount.classList.add("char-ok");
+      } else if (length <= LINKEDIN_FREE_LIMIT) {
+        charCount.classList.add("char-ok");
+      } else if (length <= LINKEDIN_FREE_SOFT_LIMIT) {
+        charCount.classList.add("char-warn");
+        if (compressBtn) compressBtn.style.display = "inline-block";
+      } else {
+        charCount.classList.add("char-danger");
+        if (compressBtn) compressBtn.style.display = "inline-block";
+      }
+    } else {
+      // Non-LinkedIn platforms: just neutral
+      charCount.classList.add("char-ok");
+    }
+
+    hint.textContent = value ? getHint(lastPlatform, length) : "";
   }
 
   function applyTemplate(templateKey) {
@@ -232,7 +328,23 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 1200);
     });
   });
+  if (compressBtn) {
+    compressBtn.addEventListener("click", () => {
+      const current = output.value || "";
+      if (!current) return;
 
+      const compressed = compressForLinkedIn(current, LINKEDIN_FREE_LIMIT);
+
+      if (compressed && compressed.length < current.length) {
+        updateOutput(compressed, "linkedin_free");
+        hint.textContent =
+          "Compressed for LinkedIn Free. Review the query to ensure it still matches your intent.";
+      } else {
+        hint.textContent =
+          "Couldn't safely compress much further. Try manually removing some titles, skills, or locations.";
+      }
+    });
+  }
   // --- AI integration via Cloudflare Worker ---
   async function generateWithAI() {
     const description = nlPrompt.value.trim();
