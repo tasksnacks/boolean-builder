@@ -133,7 +133,7 @@ function buildBooleanString({ titles, skills, locations, excludes, platform }) {
 
   return core;
 }
-// Try to compress a Boolean string to fit LinkedIn Free by removing extra OR terms.
+
 // Try to compress a Boolean string to fit LinkedIn Free by removing extra OR terms.
 function compressForLinkedIn(query, targetLength) {
   let current = (query || "").trim();
@@ -196,6 +196,7 @@ function compressForLinkedIn(query, targetLength) {
 
   return current;
 }
+
 function getHint(platform, length) {
   if (platform === "linkedin_free") {
     if (length > 100) {
@@ -223,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const locationsInput = document.getElementById("locations");
   const excludesInput = document.getElementById("excludes");
   const platformSelect = document.getElementById("platform");
-    const output = document.getElementById("output");
+  const output = document.getElementById("output");
   const generateBtn = document.getElementById("generateBtn");
   const copyBtn = document.getElementById("copyBtn");
   const compressBtn = document.getElementById("compressBtn");
@@ -238,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiStatus = document.getElementById("aiStatus");
   const templateButtons = document.querySelectorAll(".template-btn");
 
-    function updateOutput(text, platform) {
+  function updateOutput(text, platform) {
     lastPlatform = platform || lastPlatform;
 
     const value = text || "";
@@ -325,13 +326,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   generateBtn.addEventListener("click", generate);
 
+  // Robust Copy Function (Handles iframe restrictions if needed)
   copyBtn.addEventListener("click", () => {
     if (!output.value) return;
-    navigator.clipboard.writeText(output.value).then(() => {
-      copyBtn.textContent = "Copied!";
-      setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 1200);
-    });
+    
+    // Attempt standard clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(output.value).then(() => {
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 1200);
+        }).catch(err => {
+            // Fallback for iframes or older browsers
+            fallbackCopyText(output.value);
+        });
+    } else {
+        fallbackCopyText(output.value);
+    }
   });
+
+  function fallbackCopyText(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+          document.execCommand('copy');
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 1200);
+      } catch (err) {
+          console.error('Fallback: Oops, unable to copy', err);
+      }
+      document.body.removeChild(textArea);
+  }
+
   if (compressBtn) {
     compressBtn.addEventListener("click", () => {
       const current = output.value || "";
@@ -349,6 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
   // --- AI integration via Cloudflare Worker ---
   async function generateWithAI() {
     const description = nlPrompt.value.trim();
