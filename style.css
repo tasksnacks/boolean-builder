@@ -4,8 +4,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 html,
@@ -13,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
   background: #f7f8fa; /* soft SaaS background */
-  color: #1c1e21;       /* main text */
+  color: #1c1e21;      /* main text */
 }
 
 .page {
@@ -56,7 +55,7 @@ body {
 }
 
 .brand-logo-img {
-  height: 64px;   /* bigger, more visible */
+  height: 64px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -348,17 +347,15 @@ body {
   padding: 0 20px 32px;
 }
 
-/* mimic dashboard: content area with 2 columns */
 .app-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 20px;
 }
 
-/* Cards = main dashboard tiles */
 .card {
   background: #ffffff;
-  border-radius: 20px;  /* soft corners */
+  border-radius: 20px;
   padding: 16px 16px 20px;
   margin-bottom: 18px;
   border: 1px solid #e5e6eb;
@@ -386,7 +383,7 @@ textarea {
   width: 100%;
   margin-top: 4px;
   padding: 9px 10px;
-  border-radius: 10px;   /* softer fields */
+  border-radius: 10px;
   border: 1px solid #d1d5db;
   background: #ffffff;
   color: #111827;
@@ -411,9 +408,9 @@ textarea:focus {
 button {
   margin-top: 10px;
   padding: 9px 16px;
-  border-radius: 999px;  /* pill buttons */
+  border-radius: 999px;
   border: none;
-  background: #625ad8;  /* primary */
+  background: #625ad8;
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
@@ -466,13 +463,12 @@ button:disabled {
   border-color: #625ad8;
 }
 
-/* Output side (Boolean result) */
+/* Output side */
 
 #output {
   resize: vertical;
   min-height: 220px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 13px;
   line-height: 1.4;
 }
@@ -491,7 +487,7 @@ button:disabled {
 }
 
 #compressBtn {
-  background: #f97316; /* orange helper button */
+  background: #f97316;
   color: #ffffff;
 }
 
@@ -500,14 +496,12 @@ button:disabled {
 }
 
 #copyBtn {
-  background: #1f9ce4; /* secondary blue */
+  background: #1f9ce4;
 }
 
 #copyBtn:hover {
   filter: brightness(1.05);
 }
-
-/* Hints & helper text */
 
 .hint {
   margin-top: 8px;
@@ -520,8 +514,6 @@ button:disabled {
   font-size: 11px;
   color: #9ca3af;
 }
-
-/* Character count colors */
 
 .char-ok {
   color: #6b7280;
@@ -608,7 +600,7 @@ button:disabled {
   }
 
   .nav-links {
-    display: none; /* keep header clean on mobile */
+    display: none;
   }
 
   .top-nav-inner {
