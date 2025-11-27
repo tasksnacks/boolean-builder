@@ -23,7 +23,7 @@ body {
 }
 
 /* =========
-   Top navigation
+   Top navigation (light, minimal)
    ========= */
 
 .top-nav {
@@ -35,9 +35,9 @@ body {
 }
 
 .top-nav-inner {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto;
-   padding: 14px 16px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,11 +46,17 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand:hover {
+  opacity: 0.9;
 }
 
 .brand-logo-img {
-  height: 64px;
+  height: 64px;   /* bigger, more visible */
   width: auto;
   object-fit: contain;
   display: block;
@@ -64,7 +70,7 @@ body {
 
 .brand-name {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 17px;
   color: #1c1e21;
 }
 
@@ -75,7 +81,7 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   font-size: 14px;
 }
 
@@ -89,37 +95,38 @@ body {
 }
 
 /* =========
-   Hero
+   Hero (inspired by dashboard header)
    ========= */
 
 .hero {
-  background: radial-gradient(circle at 0 0, #e4e8ff, #f7f8fa);
+  background: linear-gradient(180deg, #f0f2ff 0%, #f7f8fa 100%);
   border-bottom: 1px solid #e5e6eb;
 }
 
 .hero-inner {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 16px 32px;
+  padding: 32px 20px 28px;
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 32px;
+  align-items: center;
 }
 
 .hero-copy h1 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-size: 32px;
-  color: #1c1e21;
+  color: #111827;
 }
 
 .accent {
-  color: #625ad8; /* primary accent in heading */
+  color: #625ad8; /* primary accent */
 }
 
 .hero-subtitle {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   color: #4b5563;
-  max-width: 480px;
+  max-width: 520px;
 }
 
 .hero-actions {
@@ -127,14 +134,14 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 9px 16px;
+  padding: 9px 18px;
   border-radius: 999px;
   font-weight: 600;
   font-size: 14px;
@@ -144,8 +151,9 @@ body {
 }
 
 .btn-primary {
-  background: #625ad8; /* primary button */
+  background: #625ad8;
   color: #ffffff;
+  box-shadow: 0 12px 24px rgba(98, 90, 216, 0.25);
 }
 
 .btn-primary:hover {
@@ -161,7 +169,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 12px;
 }
 
@@ -173,6 +181,8 @@ body {
   color: #4b5563;
 }
 
+/* Hero preview card (right) */
+
 .hero-preview {
   display: flex;
   align-items: center;
@@ -181,11 +191,11 @@ body {
 
 .preview-card {
   width: 100%;
-  max-width: 420px;
-  border-radius: 16px;
+  max-width: 430px;
+  border-radius: 20px;
   border: 1px solid #e5e6eb;
   background: #ffffff;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
   padding: 16px 16px 18px;
 }
 
@@ -216,7 +226,7 @@ body {
 .preview-code {
   margin: 0;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: 14px;
   background: #f3f4ff;
   border: 1px solid #e0e3ff;
   font-size: 12px;
@@ -239,13 +249,13 @@ body {
 }
 
 .section-heading {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 16px 16px;
+  padding: 26px 20px 14px;
 }
 
 .section-heading h2 {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   font-size: 22px;
   color: #111827;
 }
@@ -260,20 +270,21 @@ body {
    ========= */
 
 .grid-3 {
-  max-width: 1080px;
-  margin: 0 auto 24px;
-  padding: 0 16px 32px;
+  max-width: 1200px;
+  margin: 0 auto 22px;
+  padding: 0 20px 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .feature-card {
-  border-radius: 16px;
+  border-radius: 18px;
   border: 1px solid #e5e6eb;
   background: #ffffff;
-  padding: 14px 14px 16px;
+  padding: 14px 15px 16px;
   font-size: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
 }
 
 .feature-card h3 {
@@ -288,31 +299,32 @@ body {
 }
 
 /* =========
-   Steps
+   Steps (How it works)
    ========= */
 
 .steps {
-  max-width: 1080px;
-  margin: 0 auto 32px;
-  padding: 0 16px 32px;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  padding: 0 20px 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .step {
-  border-radius: 16px;
+  border-radius: 18px;
   border: 1px solid #e5e6eb;
   background: #ffffff;
   padding: 16px;
   font-size: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
 }
 
 .step-number {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 999px;
-  background: #1f9ce4; /* secondary button color */
+  background: #1f9ce4; /* secondary color */
   color: #ffffff;
   font-size: 13px;
   font-weight: 700;
@@ -323,7 +335,7 @@ body {
 }
 
 /* =========
-   App section
+   App section (dashboard-like UI)
    ========= */
 
 .app-section {
@@ -331,24 +343,26 @@ body {
 }
 
 .app-shell {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto 32px;
-  padding: 0 16px 32px;
+  padding: 0 20px 32px;
 }
 
+/* mimic dashboard: content area with 2 columns */
 .app-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 16px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 20px;
 }
 
+/* Cards = main dashboard tiles */
 .card {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 20px;  /* soft corners */
   padding: 16px 16px 20px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   border: 1px solid #e5e6eb;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.04);
 }
 
 .card h2 {
@@ -356,6 +370,8 @@ body {
   font-size: 18px;
   color: #111827;
 }
+
+/* Forms, inputs */
 
 label {
   display: block;
@@ -369,11 +385,17 @@ select,
 textarea {
   width: 100%;
   margin-top: 4px;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 9px 10px;
+  border-radius: 10px;   /* softer fields */
   border: 1px solid #d1d5db;
   background: #ffffff;
   color: #111827;
+  font-size: 14px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
 }
 
 input:focus,
@@ -384,23 +406,33 @@ textarea:focus {
   box-shadow: 0 0 0 1px rgba(98, 90, 216, 0.18);
 }
 
+/* Buttons inside app */
+
 button {
-  margin-top: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
+  margin-top: 10px;
+  padding: 9px 16px;
+  border-radius: 999px;  /* pill buttons */
   border: none;
-  background: #625ad8; /* primary */
+  background: #625ad8;  /* primary */
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover {
   filter: brightness(1.05);
 }
 
-/* Templates */
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Template buttons row */
 
 .templates {
   margin-bottom: 12px;
@@ -434,21 +466,22 @@ button:hover {
   border-color: #625ad8;
 }
 
-/* Output */
+/* Output side (Boolean result) */
 
 #output {
   resize: vertical;
-  min-height: 200px;
+  min-height: 220px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
   font-size: 13px;
+  line-height: 1.4;
 }
 
 .output-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 12px;
 }
 
@@ -465,6 +498,16 @@ button:hover {
 #compressBtn:hover {
   filter: brightness(1.05);
 }
+
+#copyBtn {
+  background: #1f9ce4; /* secondary blue */
+}
+
+#copyBtn:hover {
+  filter: brightness(1.05);
+}
+
+/* Hints & helper text */
 
 .hint {
   margin-top: 8px;
@@ -492,23 +535,26 @@ button:hover {
   color: #dc2626;
 }
 
-/* FAQ */
+/* =========
+   FAQ
+   ========= */
 
 .faq {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto 32px;
-  padding: 0 16px 32px;
+  padding: 0 20px 32px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .faq-item {
-  border-radius: 16px;
+  border-radius: 18px;
   border: 1px solid #e5e6eb;
   background: #ffffff;
   padding: 16px;
   font-size: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
 }
 
 .faq-item h3 {
@@ -522,18 +568,20 @@ button:hover {
   color: #6b7280;
 }
 
-/* Footer */
+/* =========
+   Footer
+   ========= */
 
 .footer {
   border-top: 1px solid #e5e6eb;
-  padding: 10px 16px 14px;
+  padding: 10px 20px 14px;
   font-size: 12px;
   color: #6b7280;
   background: #ffffff;
 }
 
 .footer-inner {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -541,31 +589,29 @@ button:hover {
   gap: 8px;
 }
 
-/* Responsive */
+/* =========
+   Responsive tweaks
+   ========= */
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .hero-inner {
     grid-template-columns: minmax(0, 1fr);
   }
+
   .hero-preview {
     order: -1;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
+
   .app-layout {
     grid-template-columns: minmax(0, 1fr);
   }
-  .nav-links {
-    display: none;
-  }
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: inherit; /* keeps original text color */
-}
 
-.brand:hover {
-  opacity: 0.85; /* tiny hover polish */
+  .nav-links {
+    display: none; /* keep header clean on mobile */
+  }
+
+  .top-nav-inner {
+    padding-inline: 14px;
+  }
 }
