@@ -1,5 +1,4 @@
 /* =========================================
-   UI LOGIC (Necessary for the new design)
    ========================================= */
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -15,7 +14,6 @@ function switchTab(tab) {
 }
 
 /* =========================================
-   YOUR ORIGINAL LOGIC (Restored)
    ========================================= */
 // STEP 1: replace this with my Cloudflare Worker URL
 const WORKER_URL = "https://boolean-builder-ai.yellowsteel.workers.dev";
