@@ -6,28 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="BooleanBear is an AI-powered Boolean builder for recruiters. Turn natural language into LinkedIn and Google X-Ray search strings." />
   
-  <!-- CSS WILL GO HERE -->
-  <style>
-    /* PASTE YOUR CSS HERE 
-      Currently just adding a basic reset so the HTML isn't completely unstyled 
-      before you provide your stylesheet.
-    */
-    body { font-family: sans-serif; padding: 20px; line-height: 1.5; }
-    .page { max-width: 1200px; margin: 0 auto; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .card { border: 1px solid #ccc; padding: 20px; border-radius: 8px; margin-bottom: 20px;}
-    .hero { text-align: center; padding: 50px 0; }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="page">
 
-    <!-- Top navigation -->
     <header class="top-nav">
       <div class="top-nav-inner">
         <a href="#top" class="brand">
-          <!-- Note: Image paths might need updating if they are local, using a placeholder for now -->
-          <img src="https://placehold.co/40x40?text=BB" alt="BooleanBear logo" class="brand-logo-img">
+          <img src="https://placehold.co/60x60?text=Bear" alt="BooleanBear logo" class="brand-logo-img">
           <div class="brand-text">
             <span class="brand-name">BooleanBear</span>
             <span class="brand-tagline">AI Boolean Builder</span>
@@ -43,7 +30,6 @@
     </header>
 
     <main>
-      <!-- Hero section -->
       <section class="hero" id="top">
         <div class="hero-inner">
           <div class="hero-copy">
@@ -78,7 +64,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
         </div>
       </section>
 
-      <!-- Product features -->
       <section class="section" id="product">
         <div class="section-heading">
           <h2>Why recruiters use BooleanBear</h2>
@@ -112,7 +97,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
         </div>
       </section>
 
-      <!-- How it works -->
       <section class="section" id="how-it-works">
         <div class="section-heading">
           <h2>How BooleanBear fits into your sourcing workflow</h2>
@@ -136,7 +120,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
         </div>
       </section>
 
-      <!-- App section -->
       <section class="section app-section" id="app">
         <div class="section-heading">
           <h2>Try BooleanBear</h2>
@@ -146,7 +129,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
         <div class="app-shell">
           <div class="app-layout">
             <div class="app-main">
-              <!-- Card 1: Structured generator -->
               <div class="card">
                 <h2>1. Structured Boolean Builder</h2>
 
@@ -193,7 +175,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
                 <button id="generateBtn">Generate Boolean String</button>
               </div>
 
-              <!-- Card 2: AI builder -->
               <div class="card">
                 <h2>2. AI Boolean Builder (DeepSeek)</h2>
                 <p class="hint">
@@ -219,7 +200,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
               </div>
             </div>
 
-            <!-- Output column -->
             <div class="app-side">
               <div class="card">
                 <h2>3. Your Boolean string</h2>
@@ -241,7 +221,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
         </div>
       </section>
 
-      <!-- FAQ -->
       <section class="section" id="faq">
         <div class="section-heading">
           <h2>FAQ</h2>
@@ -275,10 +254,6 @@ AND (berlin OR hamburg) NOT recruiter</pre>
     </footer>
   </div>
 
-  <!-- JAVASCRIPT WILL GO HERE -->
-  <script>
-    // PASTE YOUR JAVASCRIPT HERE
-    console.log("Waiting for JS...");
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
