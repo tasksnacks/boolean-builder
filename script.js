@@ -1,3 +1,22 @@
+/* =========================================
+   UI LOGIC (Necessary for the new design)
+   ========================================= */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#view-ai, #view-manual').forEach(d => d.classList.add('hidden'));
+  
+  if(tab === 'ai') {
+    document.querySelector('button[onclick="switchTab(\'ai\')"]').classList.add('active');
+    document.getElementById('view-ai').classList.remove('hidden');
+  } else {
+    document.querySelector('button[onclick="switchTab(\'manual\')"]').classList.add('active');
+    document.getElementById('view-manual').classList.remove('hidden');
+  }
+}
+
+/* =========================================
+   YOUR ORIGINAL LOGIC (Restored)
+   ========================================= */
 // STEP 1: replace this with my Cloudflare Worker URL
 const WORKER_URL = "https://boolean-builder-ai.yellowsteel.workers.dev";
 
@@ -196,7 +215,6 @@ function compressForLinkedIn(query, targetLength) {
 
   return current;
 }
-
 function getHint(platform, length) {
   if (platform === "linkedin_free") {
     if (length > 100) {
@@ -284,7 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
     titlesInput.value = tpl.titles;
     skillsInput.value = tpl.skills;
     locationsInput.value = tpl.locations;
-    excludesInput.value = tpl.excludes;
+    // Handle hidden input
+    if(excludesInput) excludesInput.value = tpl.excludes;
 
     // Default structured platform: LinkedIn Free
     platformSelect.value = "linkedin_free";
@@ -299,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
       titles: titlesInput.value,
       skills: skillsInput.value,
       locations: locationsInput.value,
-      excludes: excludesInput.value,
+      excludes: excludesInput ? excludesInput.value : "",
       platform: platformSelect.value,
     });
     updateOutput(booleanString, platformSelect.value);
@@ -317,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
       titles: titlesInput.value,
       skills: skillsInput.value,
       locations: locationsInput.value,
-      excludes: excludesInput.value,
+      excludes: excludesInput ? excludesInput.value : "",
       platform: platformSelect.value,
     });
 
@@ -326,39 +345,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   generateBtn.addEventListener("click", generate);
 
-  // Robust Copy Function (Handles iframe restrictions if needed)
   copyBtn.addEventListener("click", () => {
     if (!output.value) return;
-    
-    // Attempt standard clipboard API
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(output.value).then(() => {
-            copyBtn.textContent = "Copied!";
-            setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 1200);
-        }).catch(err => {
-            // Fallback for iframes or older browsers
-            fallbackCopyText(output.value);
-        });
-    } else {
-        fallbackCopyText(output.value);
-    }
+    navigator.clipboard.writeText(output.value).then(() => {
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+    });
   });
-
-  function fallbackCopyText(text) {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      try {
-          document.execCommand('copy');
-          copyBtn.textContent = "Copied!";
-          setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 1200);
-      } catch (err) {
-          console.error('Fallback: Oops, unable to copy', err);
-      }
-      document.body.removeChild(textArea);
-  }
-
   if (compressBtn) {
     compressBtn.addEventListener("click", () => {
       const current = output.value || "";
@@ -376,7 +369,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
   // --- AI integration via Cloudflare Worker ---
   async function generateWithAI() {
     const description = nlPrompt.value.trim();
