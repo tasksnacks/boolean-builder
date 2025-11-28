@@ -2,215 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BooleanBear – AI Boolean Builder</title>
+  <title>BooleanBear – Professional Boolean Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="BooleanBear is an AI-powered Boolean builder for recruiters." />
+  <meta name="description" content="Professional Boolean search string builder for recruiters." />
   
   <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- COMPACT HEADER -->
   <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#" class="logo">
-        <span style="font-size: 24px;">🐻</span> BooleanBear
-      </a>
-      <div class="nav-links">
-        <a href="#how-it-works">How it works</a>
-        <a href="#faq">FAQ</a>
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">🐻</span> 
+        <span class="logo-text">BooleanBear</span>
       </div>
-      <a href="#app" class="btn btn-black" style="margin-left: 24px; padding: 10px 20px; font-size: 14px;">Start building</a>
+      <div class="nav-right">
+        <a href="#faq" class="nav-link">Help</a>
+        <span class="badge-beta">Beta</span>
+      </div>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <div class="container hero-section">
-    <div class="hero-text">
-      <h1>Boolean strings at the speed of thought.</h1>
-      <p>Tell BooleanBear what you need, and watch it transform natural language into precise search strings for LinkedIn and Google.</p>
-      <a href="#app" class="btn btn-black">Start building</a>
+  <!-- MAIN APP CONTAINER -->
+  <main class="app-container">
+    
+    <div class="app-header">
+      <h1>Boolean Builder</h1>
+      <p>Generate complex X-Ray and LinkedIn strings instantly.</p>
+    </div>
+
+    <!-- THE TOOL -->
+    <div class="builder-interface">
       
-      <div style="margin-top: 30px;">
-        <span class="badge">⚡ AI-Powered</span>
-        <span class="badge">🎯 X-Ray Ready</span>
-        <span class="badge">🔒 Local-First</span>
-      </div>
-    </div>
-    
-    <div class="hero-visual">
-      <!-- Floating Card Effect -->
-      <div class="floating-card">
-        <div class="card-label">
-          <div class="icon-box">🔍</div>
-          <span>Boolean Preview</span>
-        </div>
-        <div style="margin-top: 10px; font-size: 14px; color: #555;">
-          "Senior Java backend in Berlin..."
-        </div>
-        <div class="code-snippet">("backend developer" OR "software engineer") AND (java OR spring) AND (berlin) NOT recruiter</div>
+      <!-- LEFT COLUMN: INPUTS -->
+      <div class="panel-inputs">
         
-        <!-- Decoration cursor -->
-        <div style="position: absolute; bottom: 20px; right: -15px; background: white; padding: 8px 16px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); font-size: 12px; font-weight: 600; color: #10B981; display: flex; align-items: center; gap: 6px;">
-          <span style="display: block; width: 8px; height: 8px; background: #10B981; border-radius: 50%;"></span>
-          Optimized
+        <!-- TABS -->
+        <div class="segment-control">
+          <button class="segment-btn active" onclick="switchTab('ai')">✨ AI Builder</button>
+          <button class="segment-btn" onclick="switchTab('manual')">Manual Builder</button>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- FEATURE SECTION (Visual List) -->
-  <div class="container feature-section" id="how-it-works">
-    <div class="feature-visual">
-      <div class="ui-list-card">
-        <h4 style="margin-bottom: 20px; font-weight: 600;">Building your query</h4>
-        
-        <div class="ui-list-item">
-          <div class="check-circle"></div>
-          <span>Analyzing job titles & skills</span>
-        </div>
-        <div class="ui-list-item">
-          <div class="check-circle"></div>
-          <span>Applying platform limits (LinkedIn/Google)</span>
-        </div>
-        <div class="ui-list-item">
-          <div class="check-circle"></div>
-          <span>Excluding recruiters & internal staff</span>
-        </div>
-        <div class="ui-list-item">
-          <div class="check-circle"></div>
-          <span>Structuring OR/AND logic</span>
-        </div>
-        
-        <!-- Decoration Input -->
-        <div style="margin-top: 20px; background: #F3F4F6; padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 10px; background: white; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">AI Input</span>
-          <span style="font-size: 12px; color: #9CA3AF;">What would you change?</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="hero-text" style="padding-left: 40px;">
-      <h2>The logic is built-in automatically</h2>
-      <p>Everything your search needs to function, like wrapping X-Ray queries, counting characters for LinkedIn Free, or creating exclusion lists is taken care of behind the scenes.</p>
-      <a href="#app" class="btn btn-black">Start building</a>
-    </div>
-  </div>
-
-  <!-- APP SECTION (The Dashboard) -->
-  <div class="container" id="app">
-    <div class="app-wrapper">
-      <div class="app-header">
-        <h2>Ready to use, instantly.</h2>
-        <p style="color: #4B5563;">Use the AI builder or strict templates. Everything runs locally in your browser.</p>
-      </div>
-
-      <div class="dashboard-card">
-        
-        <!-- Left: Controls -->
-        <div class="controls-panel">
-          <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('ai')">AI Builder</button>
-            <button class="tab-btn" onclick="switchTab('manual')">Manual Builder</button>
+        <!-- VIEW: AI BUILDER -->
+        <div id="view-ai" class="input-view">
+          <div class="form-group">
+            <label for="nlPrompt">Prompt</label>
+            <textarea id="nlPrompt" class="input-area" placeholder="e.g. Find me Senior Backend Engineers in Berlin with Java and Spring, excluding recruiters..."></textarea>
+            <p class="helper-text">Be specific about job titles, skills, and locations.</p>
           </div>
-
-          <!-- AI VIEW -->
-          <div id="view-ai">
-            <div class="form-group">
-              <label>Describe your candidate</label>
-              <textarea id="nlPrompt" rows="5" placeholder="e.g. Senior backend engineers with Java or Kotlin, microservices experience, based in Berlin or remote, exclude recruiters."></textarea>
-            </div>
-            <div class="form-group">
-              <label>Platform</label>
-              <select id="aiPlatform">
-                <option value="linkedin_free">LinkedIn (Free)</option>
-                <option value="linkedin_recruiter">LinkedIn Recruiter</option>
-                <option value="google_xray">Google X-Ray</option>
-              </select>
-            </div>
-            <button id="aiGenerateBtn" class="btn btn-black" style="width: 100%;">✨ Generate with AI</button>
-            <p id="aiStatus" style="font-size: 12px; color: #666; margin-top: 10px;"></p>
-          </div>
-
-          <!-- MANUAL VIEW -->
-          <div id="view-manual" class="hidden">
-            <div class="form-group">
-              <label>Templates</label>
-              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                <button class="badge template-btn" style="border:none; cursor:pointer;" data-template="java_backend">Java</button>
-                <button class="badge template-btn" style="border:none; cursor:pointer;" data-template="react_frontend">React</button>
-                <button class="badge template-btn" style="border:none; cursor:pointer;" data-template="sales_rep">Sales</button>
-                <button class="badge template-btn" style="border:none; cursor:pointer;" data-template="devops_engineer">DevOps</button>
-                <button class="badge template-btn" style="border:none; cursor:pointer;" data-template="data_analyst">Data</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Job Titles</label>
-              <input id="titles" type="text" placeholder="e.g. developer, engineer" />
-            </div>
-            <div class="form-group">
-              <label>Skills</label>
-              <input id="skills" type="text" placeholder="e.g. java, spring" />
-            </div>
-            <div class="form-group">
-              <label>Locations</label>
-              <input id="locations" type="text" placeholder="e.g. London" />
-            </div>
-            <div class="form-group">
-              <label>Platform</label>
-              <select id="platform">
-                <option value="linkedin_free">LinkedIn (Free)</option>
-                <option value="linkedin_recruiter">LinkedIn Recruiter</option>
-                <option value="google_xray">Google X-Ray</option>
-              </select>
-            </div>
-            <!-- Hidden excludes input, logic still relies on it -->
-            <div style="display:none;">
-              <input id="excludes" type="text" value='recruiter, "talent acquisition", hr'>
-            </div>
-            <button id="generateBtn" class="btn btn-black" style="width: 100%;">Build String</button>
-          </div>
-        </div>
-
-        <!-- Right: Output -->
-        <div class="output-panel">
-          <div class="panel-title">
-            <span style="font-size: 20px;">📜</span> Result
-          </div>
-          <textarea id="output" class="output-area" readonly placeholder="Your Boolean string will appear here..."></textarea>
           
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span id="charCount" style="font-size: 12px; color: #9CA3AF;">0 chars</span>
-            <div style="display: flex; gap: 8px;">
-              <button id="compressBtn" class="btn" style="padding: 8px 16px; font-size: 12px; background: #FEF3C7; color: #D97706; display: none;">Compress</button>
-              <button id="copyBtn" class="btn btn-black" style="padding: 8px 16px; font-size: 13px;">Copy</button>
+          <div class="form-group">
+            <label for="aiPlatform">Target Platform</label>
+            <div class="select-wrapper">
+              <select id="aiPlatform">
+                <option value="linkedin_free">LinkedIn (Free Version)</option>
+                <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+                <option value="google_xray">Google X-Ray (site:linkedin.com/in)</option>
+              </select>
             </div>
           </div>
-          <p id="hint" style="font-size: 12px; color: #EF4444; margin-top: 8px;"></p>
+
+          <div class="action-row">
+            <button id="aiGenerateBtn" class="btn-primary">Generate String</button>
+            <span id="aiStatus" class="status-text"></span>
+          </div>
+        </div>
+
+        <!-- VIEW: MANUAL BUILDER -->
+        <div id="view-manual" class="input-view hidden">
+          
+          <div class="quick-templates">
+            <span class="label-small">Load Template:</span>
+            <div class="template-pills">
+              <button class="pill" data-template="java_backend">Java Dev</button>
+              <button class="pill" data-template="react_frontend">React Dev</button>
+              <button class="pill" data-template="sales_rep">Sales</button>
+              <button class="pill" data-template="devops_engineer">DevOps</button>
+              <button class="pill" data-template="data_analyst">Data</button>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="titles">Job Titles <span class="req">*</span></label>
+              <input id="titles" type="text" placeholder="e.g. Developer, Engineer" />
+            </div>
+            
+            <div class="form-group">
+              <label for="skills">Skills (AND)</label>
+              <input id="skills" type="text" placeholder="e.g. Java, Spring, AWS" />
+            </div>
+
+            <div class="form-group">
+              <label for="locations">Locations (OR)</label>
+              <input id="locations" type="text" placeholder="e.g. London, Remote" />
+            </div>
+            
+            <div class="form-group">
+              <label for="excludes">Exclusions (NOT)</label>
+              <input id="excludes" type="text" value='recruiter, "talent acquisition", hr' />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="platform">Target Platform</label>
+            <div class="select-wrapper">
+              <select id="platform">
+                <option value="linkedin_free">LinkedIn (Free Version)</option>
+                <option value="linkedin_recruiter">LinkedIn Recruiter</option>
+                <option value="google_xray">Google X-Ray</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button id="generateBtn" class="btn-primary">Build String</button>
+          </div>
         </div>
 
       </div>
-    </div>
-  </div>
 
-  <div class="container" id="faq" style="padding-bottom: 80px;">
-    <h3 style="margin-bottom: 20px;">FAQ</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-      <div>
-        <h4 style="font-weight: 600; margin-bottom: 8px;">Is it free?</h4>
-        <p style="color: #666; font-size: 14px;">Yes, BooleanBear is completely free while in beta.</p>
+      <!-- RIGHT COLUMN: OUTPUT -->
+      <div class="panel-output">
+        <div class="output-header">
+          <label>Boolean Result</label>
+          <div class="output-meta">
+            <span id="charCount" class="badge-neutral">0 chars</span>
+          </div>
+        </div>
+        
+        <div class="editor-wrapper">
+          <textarea id="output" readonly placeholder="// Generated Boolean string will appear here..."></textarea>
+        </div>
+
+        <div class="output-actions">
+          <button id="copyBtn" class="btn-secondary">
+            <span class="icon">📋</span> Copy to Clipboard
+          </button>
+          <button id="compressBtn" class="btn-warning hidden">
+            <span class="icon">⚡</span> Compress for LinkedIn Free
+          </button>
+        </div>
+        
+        <p id="hint" class="hint-text"></p>
+        
+        <div class="tips-box">
+          <strong>Pro Tip:</strong> <span id="platformTip">Select a platform to see specific tips.</span>
+        </div>
       </div>
-      <div>
-        <h4 style="font-weight: 600; margin-bottom: 8px;">Where is data stored?</h4>
-        <p style="color: #666; font-size: 14px;">Nowhere. Everything runs locally in your browser.</p>
+
+    </div>
+
+    <!-- FEATURES / FAQ GRID -->
+    <div class="info-grid" id="faq">
+      <div class="info-card">
+        <h3>Privacy First</h3>
+        <p>No data is stored. All processing happens in your browser.</p>
+      </div>
+      <div class="info-card">
+        <h3>X-Ray Optimized</h3>
+        <p>Automatically adds <code>-intitle:jobs</code> and <code>site:linkedin.com/in</code> when X-Ray is selected.</p>
+      </div>
+      <div class="info-card">
+        <h3>Free Limits</h3>
+        <p>Includes a compression algorithm to help fit complex queries into LinkedIn's ~100 char limit.</p>
       </div>
     </div>
-  </div>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
