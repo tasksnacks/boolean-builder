@@ -22,7 +22,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-app);
   color: var(--text-main);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -36,11 +36,14 @@ body {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .nav-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -75,6 +78,7 @@ body {
   gap: 24px;
 }
 
+.app-header { margin-bottom: 10px; }
 .app-header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
 .app-header p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
 
@@ -285,22 +289,70 @@ input[type="text"]:focus, textarea:focus, select:focus {
 .status-text { font-size: 13px; color: var(--text-muted); }
 .hidden { display: none; }
 
-/* INFO GRID */
-.info-grid {
+/* ========= ABOUT / VISION SECTION ========= */
+.about-section {
+  margin-top: 60px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.about-header {
+  margin-bottom: 30px;
+}
+.about-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.about-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 20px;
+  gap: 32px;
+  margin-bottom: 40px;
 }
-.info-card {
-  background: transparent;
-  padding: 16px;
-  border: 1px dashed var(--border-color);
-  border-radius: var(--radius);
+
+.about-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-main);
 }
-.info-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-.info-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.about-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.roadmap-box {
+  background: #F9FAFB;
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+}
+
+.roadmap-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.roadmap-header h4 { font-size: 15px; font-weight: 600; }
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.roadmap-box p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
 
 @media (max-width: 768px) {
-  .info-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
 }
